@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from .views import index, done, update_feedback
+from .views import FeedBackView, DoneView, FeedBackUpdateView
 
 urlpatterns = [
-    path('', index),
-    path('done', done),
-    path('<int:id_feedback>', update_feedback)
+    path('', FeedBackView.as_view()),
+    path('done', DoneView.as_view()),
+    path('<int:id_feedback>', FeedBackUpdateView.as_view())
 ]
