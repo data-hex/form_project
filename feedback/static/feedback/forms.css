@@ -12,6 +12,15 @@ h2{
     box-shadow: 0 2px 8px #3ca3c1;
 }
 
+h3{
+    width:30%;
+    margin: 20px auto 5px;
+    text-align: start;
+    padding: 5px;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px #3ca3c1;
+}
+
 form {
     margin: 1.5rem auto 5px;
     width: 90%;
