@@ -4,6 +4,7 @@ from .forms import FeedbackForm
 from .models import Feedback
 from django.views import View
 from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 
 
 # Create your views here.
@@ -44,13 +45,24 @@ class FeedBackUpdateView(View):
             return HttpResponseRedirect('/done')
 
 
-class ListFeedBack(TemplateView):
-    template_name = 'feedback/list_feedback.html'
+# class ListFeedBack(TemplateView):
+#     template_name = 'feedback/list_feedback.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['all_feed'] = Feedback.objects.all
+#         return context
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['all_feed'] = Feedback.objects.all
-        return context
+class ListFeedBack(ListView):
+    template_name = 'feedback/list_feedback.html'
+    model = Feedback
+    context_object_name = 'feedbacks'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        filter_qs = queryset.filter(rating__gt=2) #фильтрация
+        return filter_qs
+
 
 class DetailFeedBack(TemplateView):
     template_name = 'feedback/detail_feedback.html'
