@@ -3,6 +3,7 @@ from django.views import View
 from .forms import GalleryUploadForm
 from django.http import HttpResponseRedirect
 from .models import Gallery
+from django.views.generic.edit import CreateView
 
 # Create your views here.
 
@@ -25,3 +26,10 @@ class GalleryView(View):
             new_image.save()
             return HttpResponseRedirect('load_image')
         return render(request, 'gallery/load_file.html', {'form': form})
+
+class CreateGalleryView(CreateView):
+    model = Gallery
+    #fields = '__all__'
+    form_class = GalleryUploadForm
+    template_name = 'gallery/load_file.html'
+    success_url = '/load_image'
